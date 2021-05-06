@@ -11,17 +11,19 @@ const UserValidator = require('./validators/UserValidator');
 //IMPORT CONTROLLERS
 const AuthController = require('./controllers/AuthController');
 const UserController = require('./controllers/UserController');
+const RankController = require('./controllers/RankController');
 
-router.get('/ping', (req, res) => {
-  res.json({ pong: true });
-});
+router.get('/ranking', RankController.getRank);
 
-router.get('/states', Auth.private, UserController.getStates);
-
+//Loga no sistema
 router.post('/user/signin', AuthValidator.signin, AuthController.signin);
+//Faz Cadastro
 router.post('/user/signup', AuthValidator.signup, AuthController.signup);
 
+//Pega informações do user
 router.get('/user/me', Auth.private, UserController.info);
+
+//Altera informações do user
 router.put(
   '/user/me',
   UserValidator.editAction,
