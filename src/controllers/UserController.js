@@ -1,49 +1,31 @@
 const mongoose = require('mongoose');
 const { validationResult, matchedData } = require('express-validator');
 const bcrypt = require('bcrypt');
-const State = require('../models/State');
+
 const User = require('../models/User');
-const Category = require('../models/Category');
-const Ad = require('../models/Ad');
+const Rank = require('../models/Rank');
 
 module.exports = {
-  getStates: async (req, res) => {
-    let states = await State.find();
-    res.json({ states });
-  },
-
   info: async (req, res) => {
     let token = req.query.token;
-
     const user = await User.findOne(token);
-    const state = await State.findById(user.state);
-    const ads = await Ad.find({ idUser: user._id.toString() });
 
-    let adList = [];
-
-    for (let i in ads) {
-      const cat = await Category.findById(ads[i].category);
-
-      adList.push({ ...ads[i], category: cat.slug });
-
-      adList.push({
-        id: ads[i]._id,
-        status: ads[i].images,
-        dateCreated: ads[i].dateCreated,
-        title: ads[i].title,
-        price: ads[i].price,
-        priceNegociable: ads[i].priceNegociable,
-        description: ads[i].description,
-        views: ads[i].views,
-        category: cat.slug,
-      });
-    }
+    const name = await User.findOne(user.name);
+    const email = await User.findOne(user.email);
+    //const img = await User.findOne(user.img);
+    let level = await User.findOne(user.level);
+    let completed = await User.findOne(user.completed);
+    let exp = await User.findOne(user.exp);
+    let position = await Rank.findById(user.position);
 
     res.json({
       name: user.name,
       email: user.email,
-      state: state.name,
-      ads: adList,
+      //img: user.img,
+      level: user.level,
+      completed: user.completed,
+      exp: user.exp,
+      position: rank.position,
     });
   },
 

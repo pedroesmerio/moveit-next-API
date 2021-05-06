@@ -58,21 +58,22 @@ module.exports = {
       });
       return;
     }
-    //Verifica se Estado já existe
-    if (mongoose.Types.ObjectId.isValid(data.state)) {
-      const stateItem = await State.findById(data.state);
-      if (!stateItem) {
-        res.json({
-          error: { state: { msg: 'Estado já existe!' } },
-        });
-        return;
-      }
-    } else {
-      res.json({
-        error: { state: { msg: 'Código de estado inválido' } },
-      });
-      return;
-    }
+
+    ////Verifica se Estado já existe
+    //if (mongoose.Types.ObjectId.isValid(data.state)) {
+    //const stateItem = await State.findById(data.state);
+    //if (!stateItem) {
+    //res.json({
+    //error: { state: { msg: 'Estado já existe!' } },
+    //});
+    //return;
+    //}
+    //} else {
+    //res.json({
+    //error: { state: { msg: 'Código de estado inválido' } },
+    //});
+    //return;
+    //}
 
     //Cria usuário no banco de dados
     const passwordHash = await bcrypt.hash(data.password, 10);
@@ -83,9 +84,12 @@ module.exports = {
     const newUser = new User({
       name: data.name,
       email: data.email,
+      img: data.img,
+      level: data.level,
+      completed: data.completed,
+      exp: data.exp,
       passwordHash,
       token,
-      state: data.state,
     });
 
     await newUser.save();

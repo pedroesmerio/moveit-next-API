@@ -15,11 +15,15 @@ module.exports = {
       normalizeEmail: true,
       errorMessage: 'E-mail inválido',
     },
+    img: {},
+    level: {},
+    completed: {},
+    exp: {},
     password: {
       isLength: {
-        options: { min: 2 },
+        options: { min: 7 },
       },
-      errorMessage: 'Senha precisa ter pelo menos 2 caracteres',
+      errorMessage: 'Senha precisa ter pelo menos 7 caracteres',
     },
   }),
 
