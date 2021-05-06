@@ -1,0 +1,42 @@
+Database moveit structure:
+- users
+- ranking
+
+Models:
+
+User:
+  - _id
+  - name
+  - email
+  - img [{url, default: true}]
+  - level => state
+  - completed
+  - experience
+  - position
+  - passwordHash
+  - token
+
+
+Rank:
+  - position
+  - token
+
+Controllers:
+
+User:
+    - _id
+    - user.name
+    - user.email
+    - user.img [{url, default: true}]
+    - user.level => state
+    - user.completed
+    - user.exp
+    - rank.position
+    - passwordHash
+    - token
+Rank:
+    - position
+    - user.name
+    - user.level
+    - user.completed
+    - user.experience
