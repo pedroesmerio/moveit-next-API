@@ -3,7 +3,6 @@ const { validationResult, matchedData } = require('express-validator');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
-const State = require('../models/State');
 
 module.exports = {
   signin: async (req, res) => {
