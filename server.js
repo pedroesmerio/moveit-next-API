@@ -35,6 +35,7 @@ server.use(express.static(__dirname + '/public'));
 //USANDO AS ROTAS--------------------------------------------------------
 server.use('/', apiRoutes);
 
+//INICIALIZANDO O SERVIDOR --------------------------------------------------------
 server.set('port', process.env.PORT);
 server.listen(server.get('port'), () => {
   console.log(`Server running on: http://localhost:${process.env.PORT}`);
